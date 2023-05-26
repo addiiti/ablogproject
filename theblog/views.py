@@ -1,3 +1,11 @@
+from tensorflow.keras.models import load_model
+from tensorflow import keras
+from keras import Model
+from keras.layers import Dense
+
+import os
+from django.conf import settings
+
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import Post, Category, Comment
@@ -72,6 +80,8 @@ class AddPostView(CreateView):
 
 class AddCommentView(CreateView):
     model=Comment
+    #model_path = os.path.join(settings.STATIC_ROOT, 'ml_models/toxicity.h5') #1
+   # model = load_model(model_path)          #2
     form_class=CommentForm
     template_name='add_comment.html'
     success_url=reverse_lazy('home')   
