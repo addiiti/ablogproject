@@ -45,6 +45,12 @@ class Post(models.Model):
 
     likes=models.ManyToManyField(User,related_name='blog_posts')
 
+    @property
+    def my_header_image(self):
+        if self.header_image:
+            return self.header_image.url
+        return ''
+
     def total_likes(self):
         return self.likes.count()
 
